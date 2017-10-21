@@ -1,0 +1,20 @@
+<button [routerLink]="['/home']">Back</button>
+<input  [(ngModel)]="searchInput" type="search" placeholder="Search..." value="search">
+<button (click)="search(searchInput)">Search</button>
+<button (click)="search()">Show All</button>
+<button [routerLink]="['/timesheet.new']">Next</button>
+
+
+<ul *ngFor="let employee of employees">
+    <li *ngIf="!employee.isSelected">            
+        <span>{{employee.name}}</span>
+        <button (click)="select(employee)">Add</button>
+    </li>
+</ul>
+
+<ul *ngFor="let employee of selecteds">
+        <li *ngIf="employee.isSelected">            
+            <span>{{employee.name}}</span>
+            <button (click)="remove(employee)">Remove</button>
+        </li>
+    </ul>
