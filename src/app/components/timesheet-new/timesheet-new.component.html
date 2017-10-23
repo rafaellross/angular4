@@ -1,4 +1,8 @@
-<p>
-  timesheet-new works!
-</p>
+<button [routerLink]="['/select']">Back</button>
+<ul *ngFor="let employee of selecteds">
+    <li *ngIf="employee.isSelected">            
+        <span>{{employee.name}}</span>
+     
+    </li>
+</ul>
 <app-timesheet></app-timesheet>

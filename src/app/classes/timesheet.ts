@@ -1,6 +1,5 @@
 import { Employee } from "./app.employee";
-
-
+import { Weekday } from "./weekday";
 
 export class Timesheet {
     id: number;
@@ -8,5 +7,6 @@ export class Timesheet {
     employees: Employee[];
     start: number;
     end: number;
-    interval: number
+    interval: number;
+    weekDay: Weekday;
 }

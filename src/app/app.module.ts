@@ -11,6 +11,7 @@ import {TimesheetEditComponent} from './components/timesheet-edit/timesheet-edit
 import {ManageComponent} from './components/manage/manage.component';
 import { TimeSheetDataService } from "./services/time-sheet-data.service";
 import {FormsModule} from '@angular/forms';
+import { ConvertToHourPipe } from './convert-to-hour.pipe';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {FormsModule} from '@angular/forms';
     TimesheetComponent,
     TimesheetNewComponent,
     TimesheetEditComponent,
-    ManageComponent    
+    ManageComponent,
+    ConvertToHourPipe    
 
   ],
   imports: [

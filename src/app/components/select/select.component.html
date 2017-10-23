@@ -2,7 +2,7 @@
 <input  [(ngModel)]="searchInput" type="search" placeholder="Search..." value="search">
 <button (click)="search(searchInput)">Search</button>
 <button (click)="search()">Show All</button>
-<button [routerLink]="['/timesheet.new']">Next</button>
+<button [routerLink]="['/timesheet.new']" [disabled]="selecteds.length === 0" (click)="timeSheetDataService.selecteds = selecteds">Next</button>
 
 
 <ul *ngFor="let employee of employees">
@@ -17,4 +17,4 @@
             <span>{{employee.name}}</span>
             <button (click)="remove(employee)">Remove</button>
         </li>
-    </ul>
+</ul>

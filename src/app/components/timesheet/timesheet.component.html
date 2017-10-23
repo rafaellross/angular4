@@ -4,15 +4,22 @@
   <span>Start</span>  
   <span>End</span>  
 </div>
-
+<select [(ngModel)]="startHour">
+  <option *ngFor="let week of ListWeeks" value="{{week.Start}}">{{week.Start | date: 'dd/MM/yyyy'}} - {{week.End | date: 'dd/MM/yyyy'}}</option>
+</select>
+<span>Today: {{Today | date: 'dd/MM/yyyy'}}</span>
+<br>
+<span>Oldest: {{Oldest | date: 'dd/MM/yyyy'}}</span>
+<br>
 <div>
   <span>Monday</span>
-  <select>
-    <option >00:00</option>
+  <select [(ngModel)]="startHour">
+    <option *ngFor="let hour of hours()" value="{{hour}}">{{hour | convertToHour}}</option>
   </select>
-  <select>
-    <option >00:00</option>
+  <select [(ngModel)]="endHour">
+    <option *ngFor="let endHours of hours(startHour)" value="{{endHours}}">{{endHours | convertToHour}}</option>
   </select>
   
 </div>
-<button [routerLink]="['/manage']">Save</button>
+<button [routerLink]="['/manage']" (click)="save()">Save</button>
+

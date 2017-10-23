@@ -13,24 +13,33 @@ export class SelectComponent implements OnInit {
   @Input() searchInput: string;
   employees: Employee[];
   selecteds: Employee[];
+  dataIsLoaded: boolean;
   constructor(private timeSheetDataService : TimeSheetDataService) { }
 
   ngOnInit() {
-    this.selecteds = [];
+    if(this.timeSheetDataService.selecteds === undefined){
+      this.selecteds = [];
+    }else{
+      this.selecteds = this.timeSheetDataService.selecteds;
+    }
+    
     this.employees = [];
   }
 
   search(name: string = ""){
-    this.timeSheetDataService.getEmployees(name)
-    .subscribe(data => this.employees = data.filter(f => !this.selecteds.includes(f)));          
-    //this.employees = this.employees.filter(f => !this.selecteds.includes(f));    
+    if(!this.dataIsLoaded){
+
+        this.timeSheetDataService.getEmployees(name)
+        .subscribe(data => this.employees = data.filter(f => !this.selecteds.includes(f)));          
+        this.dataIsLoaded = true;
+    }
   }
 
   select(employee: Employee){
     
     if(this.selecteds.find(x => x.id === employee.id) === undefined){
       employee.isSelected = true;
-      this.selecteds.push(employee);
+      this.selecteds.push(employee);      
     }  
   }
 
