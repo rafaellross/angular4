@@ -17,7 +17,7 @@ export class TimesheetNewComponent implements OnInit {
     }else{
       this.selecteds = this.timeSheetDataService.selecteds;
     }    
-    console.log(this.selecteds);
+    
   }
 
   save(){

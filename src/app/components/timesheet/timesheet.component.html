@@ -4,21 +4,25 @@
   <span>Start</span>  
   <span>End</span>  
 </div>
-<select [(ngModel)]="startHour">
-  <option *ngFor="let week of ListWeeks" value="{{week.Start}}">{{week.Start | date: 'dd/MM/yyyy'}} - {{week.End | date: 'dd/MM/yyyy'}}</option>
+
+<select [(ngModel)]="Selectedweek" (change)="selected=true">
+  <option *ngFor="let week of ListWeeks" [ngValue]="week">{{week.Start | date: 'dd/MM/yyyy'}} - {{week.End | date: 'dd/MM/yyyy'}}</option>
 </select>
-<span>Today: {{Today | date: 'dd/MM/yyyy'}}</span>
 <br>
-<span>Oldest: {{Oldest | date: 'dd/MM/yyyy'}}</span>
-<br>
-<div>
-  <span>Monday</span>
-  <select [(ngModel)]="startHour">
-    <option *ngFor="let hour of hours()" value="{{hour}}">{{hour | convertToHour}}</option>
-  </select>
-  <select [(ngModel)]="endHour">
-    <option *ngFor="let endHours of hours(startHour)" value="{{endHours}}">{{endHours | convertToHour}}</option>
-  </select>
+<div *ngIf="selected" >
+  <div>
+      <span *ngFor="let day of render(Selectedweek)">
+        <div>{{day.Day.Name}} ({{day.Date}})</div>
+        <select (change)="day.StartSelected = true">
+            <option *ngFor="let hour of day.Start" [ngValue]="{{hour}}">{{hour | convertToHour}}</option>
+          </select>          
+          <select [disabled]="!day.StartSelected">
+            <option *ngFor="let hour of day.End" [ngValue]="{{hour}}">{{hour | convertToHour}}</option>
+          </select>    
+        
+      </span>
+      <br>
+  </div>
   
 </div>
 <button [routerLink]="['/manage']" (click)="save()">Save</button>
